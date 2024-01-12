@@ -1,0 +1,1 @@
+omtrivediportfolio.netlify.app
