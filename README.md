@@ -1,1 +1,1 @@
-Link :  #omtrivediportfolio.netlify.app
+Link : https://omtrivediportfolio.netlify.app/
