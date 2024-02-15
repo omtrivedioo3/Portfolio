@@ -73,9 +73,24 @@ section{
     justify-content: center;
     align-items: center;
 }
-.home-img img{
-    width: 30vw;
+.home-img{
+    width: 100%;
+    height: auto;
+    display: block;
+    /* width: 30vw; */
     animation :.5s ease;
+    position: relative;
+    /* width: 300px; Set the width of your image container */
+    margin: 20px auto; /* Adjust margin as needed */
+    overflow: hidden;
+    border: 5px solid #fff; /* Set the border color and width */
+    border-radius: 10px; /* Set the border radius for rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add a subtle shadow */
+}
+.home-img img {
+    width: 100%;
+    height: auto;
+    display: block;
 }
 /* @keyframes floatImage{
    0%{
