@@ -331,45 +331,79 @@ export default function App() {
             </motion.div>
           </div>
 
-          {/* Photo Column */}
+          {/* Interactive IDE Terminal Column */}
           <div className="flex-1 flex justify-center items-center">
             <motion.div 
-              className="relative w-72 h-72 sm:w-80 sm:h-80 md:w-[360px] md:h-[360px]"
-              initial={{ opacity: 0, scale: 0.9 }}
+              className="relative w-full max-w-[460px] h-[360px]"
+              initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.7 }}
             >
               {/* Spinning gradient border backdrop */}
-              <div className="absolute inset-[-4px] rounded-3xl bg-gradient-to-tr from-blue-500 via-purple-500 to-pink-500 opacity-75 blur-md animate-pulse"></div>
+              <div className="absolute inset-[-4px] rounded-2xl bg-gradient-to-tr from-blue-500/30 via-purple-500/20 to-pink-500/30 opacity-75 blur-lg animate-pulse-slow"></div>
               
-              <div className="absolute inset-0 rounded-3xl overflow-hidden glass-panel border border-white/10 glow-purple flex justify-center items-center animate-float">
-                <img 
-                  src="/images/om_photo1.jpg" 
-                  alt="Om Trivedi photo"
-                  className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700 scale-[1.02] hover:scale-[1.05]"
-                  onError={(e) => {
-                    e.target.onerror = null;
-                    e.target.src = "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=1000"; // Fallback URL
-                  }}
-                />
-
-                {/* Floating Micro-Badge */}
-                <div className="absolute bottom-4 left-4 right-4 glass-panel border border-white/10 rounded-xl p-3 flex items-center justify-between shadow-xl">
-                  <div className="flex items-center gap-2.5">
-                    <span className="flex h-2.5 w-2.5 relative">
-                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
-                      <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-green-500"></span>
-                    </span>
-                    <div className="text-left">
-                      <div className="text-[10px] text-gray-400 font-bold uppercase tracking-wider">Currently at</div>
-                      <div className="text-xs font-semibold text-white">Google India</div>
-                    </div>
+              {/* Mock VS Code Window */}
+              <div className="absolute inset-0 rounded-2xl overflow-hidden glass-panel border border-white/10 shadow-2xl flex flex-col font-mono text-xs text-left">
+                {/* Header / Window Controls */}
+                <div className="h-10 bg-[#0c101d] px-4 flex items-center justify-between border-b border-white/5 select-none shrink-0">
+                  <div className="flex items-center gap-1.5">
+                    <span className="w-3 h-3 rounded-full bg-red-500/80"></span>
+                    <span className="w-3 h-3 rounded-full bg-yellow-500/80"></span>
+                    <span className="w-3 h-3 rounded-full bg-green-500/80"></span>
                   </div>
-                  <img 
-                    src="https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_2015_logo.svg" 
-                    alt="Google Logo" 
-                    className="h-3.5 opacity-90"
-                  />
+                  <div className="text-gray-400 text-[10px] font-semibold bg-[#030712] px-3 py-1 rounded border border-white/5">
+                    om_trivedi.js — developer-profile
+                  </div>
+                  <div className="w-12"></div> {/* Spacer for symmetry */}
+                </div>
+
+                {/* Editor Content */}
+                <div className="flex-1 p-5 overflow-auto bg-[#070b15]/90 leading-relaxed text-gray-300 text-[11px] sm:text-xs">
+                  <div>
+                    <span className="text-purple-400">const</span> <span className="text-blue-400">developer</span> = &#123;
+                  </div>
+                  <div className="pl-4">
+                    <span className="text-gray-400">name:</span> <span className="text-green-300">"Om Trivedi"</span>,
+                  </div>
+                  <div className="pl-4">
+                    <span className="text-gray-400">title:</span> <span className="text-green-300">"Software Apprentice"</span>,
+                  </div>
+                  <div className="pl-4">
+                    <span className="text-gray-400">company:</span> <span className="text-[#4285F4]">"G</span><span className="text-[#EA4335]">o</span><span className="text-[#FBBC05]">o</span><span className="text-[#4285F4]">g</span><span className="text-[#34A853]">l</span><span className="text-[#EA4335]">e"</span>,
+                  </div>
+                  <div className="pl-4">
+                    <span className="text-gray-400">location:</span> <span className="text-green-300">"Gurgaon, India"</span>,
+                  </div>
+                  <div className="pl-4">
+                    <span className="text-gray-400">skills:</span> &#123;
+                    <div className="pl-4">
+                      <span className="text-gray-400">languages:</span> [<span className="text-green-300">"C++"</span>, <span className="text-green-300">"C#"</span>, <span className="text-green-300">"Python"</span>, <span className="text-green-300">"JS"</span>],
+                    </div>
+                    <div className="pl-4">
+                      <span className="text-gray-400">cloud:</span> [<span className="text-green-300">"GCP"</span>, <span className="text-green-300">"AWS"</span>, <span className="text-green-300">"Docker"</span>],
+                    </div>
+                    <div className="pl-4">
+                      <span className="text-gray-400">genAI:</span> [<span className="text-green-300">"LLMs"</span>, <span className="text-green-300">"RAG"</span>, <span className="text-green-300">"Agents"</span>]
+                    </div>
+                    &#125;,
+                  </div>
+                  <div className="pl-4">
+                    <span className="text-gray-400">specialty:</span> <span className="text-green-300">"Clean Architecture & Performance"</span>,
+                  </div>
+                  <div className="pl-4">
+                    <span className="text-gray-400">leetcodeKnight:</span> <span className="text-amber-400">true</span>,
+                  </div>
+                  <div className="pl-4">
+                    <span className="text-gray-400">codeforcesSpecialist:</span> <span className="text-cyan-400">true</span>
+                  </div>
+                  <div>&#125;;</div>
+                  
+                  <div className="mt-4">
+                    <span className="text-blue-400">console</span>.<span className="text-yellow-400">log</span>(<span className="text-blue-400">developer</span>.<span className="text-purple-400">currentFocus</span>);
+                  </div>
+                  <div className="text-gray-500 italic mt-1">
+                    // Output: Building agentic LLM workflows and scalable APIs
+                  </div>
                 </div>
               </div>
             </motion.div>
