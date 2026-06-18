@@ -334,7 +334,7 @@ export default function App() {
           {/* Interactive IDE Terminal Column */}
           <div className="flex-1 flex justify-center items-center">
             <motion.div 
-              className="relative w-full max-w-[460px] h-[360px]"
+              className="relative w-full max-w-[460px]"
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.7 }}
@@ -343,7 +343,7 @@ export default function App() {
               <div className="absolute inset-[-4px] rounded-2xl bg-gradient-to-tr from-blue-500/30 via-purple-500/20 to-pink-500/30 opacity-75 blur-lg animate-pulse-slow"></div>
               
               {/* Mock VS Code Window */}
-              <div className="absolute inset-0 rounded-2xl overflow-hidden glass-panel border border-white/10 shadow-2xl flex flex-col font-mono text-xs text-left">
+              <div className="relative h-[360px] w-full rounded-2xl overflow-hidden glass-panel border border-white/10 shadow-2xl flex flex-col font-mono text-xs text-left">
                 {/* Header / Window Controls */}
                 <div className="h-10 bg-[#0c101d] px-4 flex items-center justify-between border-b border-white/5 select-none shrink-0">
                   <div className="flex items-center gap-1.5">
