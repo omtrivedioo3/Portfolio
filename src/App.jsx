@@ -92,6 +92,8 @@ export default function App() {
   const [copiedText, setCopiedText] = useState('');
   const [activeTab, setActiveTab] = useState('all');
   const [formSubmitted, setFormSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
 
   const typewriterWords = [
     "Software Apprentice at Google",
@@ -1071,29 +1073,52 @@ export default function App() {
                     <div className="mx-auto w-12 h-12 rounded-full bg-green-500/15 border border-green-500/35 flex items-center justify-center text-green-400">
                       <CheckCircle className="w-6 h-6" />
                     </div>
-                    <h3 className="text-xl font-bold text-white">Message Ready!</h3>
+                    <h3 className="text-xl font-bold text-white">Message Sent!</h3>
                     <p className="text-sm text-gray-400 max-w-sm mx-auto">
-                      Click the button below to send your pre-filled message through your default email client.
+                      Thank you for reaching out! I have received your message and will get back to you as soon as possible.
                     </p>
-                    <a
-                      href={`mailto:omtrivedioo3@gmail.com?subject=Portfolio Message&body=Hi Om,%0D%0D`}
-                      className="inline-flex items-center gap-1.5 px-6 py-3 rounded-xl text-xs font-bold uppercase tracking-wider bg-green-600 hover:bg-green-700 text-white transition-all shadow-lg"
+                    <button
                       onClick={() => setFormSubmitted(false)}
+                      className="px-6 py-3 rounded-xl text-xs font-bold uppercase tracking-wider bg-white/5 hover:bg-white/10 border border-white/10 text-gray-200 transition-all"
                     >
-                      Open Email App <ArrowUpRight className="w-4 h-4" />
-                    </a>
+                      Send Another Message
+                    </button>
                   </div>
                 ) : (
                   <form 
-                    onSubmit={(e) => {
+                    onSubmit={async (e) => {
                       e.preventDefault();
+                      setIsSubmitting(true);
+                      
                       const formData = new FormData(e.target);
-                      const name = formData.get('name');
-                      const email = formData.get('email');
-                      const message = formData.get('message');
-                      const mailtoUrl = `mailto:omtrivedioo3@gmail.com?subject=Contact from ${encodeURIComponent(name)}&body=Sender Email: ${encodeURIComponent(email)}%0D%0DMessage:%0D${encodeURIComponent(message)}`;
-                      window.location.href = mailtoUrl;
-                      setFormSubmitted(true);
+                      const data = {
+                        name: formData.get('name'),
+                        email: formData.get('email'),
+                        message: formData.get('message'),
+                        _subject: `New Portfolio Message from ${formData.get('name')}`
+                      };
+
+                      try {
+                        const response = await fetch("https://formsubmit.co/ajax/omtrivedioo3@gmail.com", {
+                          method: "POST",
+                          headers: {
+                            "Content-Type": "application/json",
+                            "Accept": "application/json"
+                          },
+                          body: JSON.stringify(data)
+                        });
+                        
+                        if (response.ok) {
+                          setFormSubmitted(true);
+                        } else {
+                          alert("Oops! Something went wrong. Please try again.");
+                        }
+                      } catch (error) {
+                        console.error(error);
+                        alert("Oops! Failed to send the message. Please check your network and try again.");
+                      } finally {
+                        setIsSubmitting(false);
+                      }
                     }}
                     className="space-y-5"
                   >
@@ -1105,8 +1130,9 @@ export default function App() {
                           id="form-name"
                           name="name" 
                           required 
+                          disabled={isSubmitting}
                           placeholder="Your Name"
-                          className="w-full h-12 px-4 rounded-xl bg-white/5 border border-white/5 hover:border-white/10 focus:border-blue-500/50 focus:bg-[#070b19] outline-none text-sm text-white transition-all"
+                          className="w-full h-12 px-4 rounded-xl bg-white/5 border border-white/5 hover:border-white/10 focus:border-blue-500/50 focus:bg-[#070b19] outline-none text-sm text-white transition-all disabled:opacity-50"
                         />
                       </div>
                       <div className="space-y-2">
@@ -1116,8 +1142,9 @@ export default function App() {
                           id="form-email"
                           name="email" 
                           required 
+                          disabled={isSubmitting}
                           placeholder="your.email@example.com"
-                          className="w-full h-12 px-4 rounded-xl bg-white/5 border border-white/5 hover:border-white/10 focus:border-blue-500/50 focus:bg-[#070b19] outline-none text-sm text-white transition-all"
+                          className="w-full h-12 px-4 rounded-xl bg-white/5 border border-white/5 hover:border-white/10 focus:border-blue-500/50 focus:bg-[#070b19] outline-none text-sm text-white transition-all disabled:opacity-50"
                         />
                       </div>
                     </div>
@@ -1128,17 +1155,19 @@ export default function App() {
                         id="form-msg"
                         name="message" 
                         required 
+                        disabled={isSubmitting}
                         rows="4" 
                         placeholder="Hello Om, I would like to connect with you regarding..."
-                        className="w-full p-4 rounded-xl bg-white/5 border border-white/5 hover:border-white/10 focus:border-blue-500/50 focus:bg-[#070b19] outline-none text-sm text-white transition-all resize-none"
+                        className="w-full p-4 rounded-xl bg-white/5 border border-white/5 hover:border-white/10 focus:border-blue-500/50 focus:bg-[#070b19] outline-none text-sm text-white transition-all resize-none disabled:opacity-50"
                       ></textarea>
                     </div>
 
                     <button 
                       type="submit" 
-                      className="w-full h-12 rounded-xl text-xs font-bold uppercase tracking-widest bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white shadow-lg transition-all"
+                      disabled={isSubmitting}
+                      className="w-full h-12 rounded-xl text-xs font-bold uppercase tracking-widest bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white shadow-lg transition-all disabled:opacity-75 disabled:cursor-not-allowed"
                     >
-                      Send Message via Email
+                      {isSubmitting ? "Sending..." : "Send Message"}
                     </button>
                   </form>
                 )}
