@@ -1,10 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
   ExternalLink, 
   Mail, 
   Award, 
-  Briefcase, 
   GraduationCap, 
   Code, 
   Server, 
@@ -77,8 +76,10 @@ const useTypewriter = (words, typingSpeed = 80, deletingSpeed = 40, delayBetween
     if (!isDeleting && currentText === activeWord) {
       timer = setTimeout(() => setIsDeleting(true), delayBetween);
     } else if (isDeleting && currentText === '') {
-      setIsDeleting(false);
-      setCurrentWordIndex((prev) => (prev + 1) % words.length);
+      timer = setTimeout(() => {
+        setIsDeleting(false);
+        setCurrentWordIndex((prev) => (prev + 1) % words.length);
+      }, 0);
     }
 
     return () => clearTimeout(timer);
@@ -86,7 +87,7 @@ const useTypewriter = (words, typingSpeed = 80, deletingSpeed = 40, delayBetween
 
   return currentText;
 };
-
+ 
 export default function App() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [copiedText, setCopiedText] = useState('');
@@ -379,7 +380,7 @@ export default function App() {
                   <div className="pl-4">
                     <span className="text-gray-400">skills:</span> &#123;
                     <div className="pl-4">
-                      <span className="text-gray-400">languages:</span> [<span className="text-green-300">"C++"</span>, <span className="text-green-300">"C#"</span>, <span className="text-green-300">"Python"</span>, <span className="text-green-300">"JS"</span>],
+                      <span className="text-gray-400">languages:</span> [<span className="text-green-300">"Java"</span>, <span className="text-green-300">"C++"</span>, <span className="text-green-300">"Python"</span>, <span className="text-green-300">"JS"</span>],
                     </div>
                     <div className="pl-4">
                       <span className="text-gray-400">cloud:</span> [<span className="text-green-300">"GCP"</span>, <span className="text-green-300">"AWS"</span>, <span className="text-green-300">"Docker"</span>],
@@ -498,15 +499,15 @@ export default function App() {
                 <ul className="space-y-2.5 text-gray-400 text-sm">
                   <li className="flex gap-2">
                     <ChevronRight className="w-4 h-4 text-blue-400 shrink-0 mt-0.5" />
-                    <span>Learning and working with Google Cloud Platform (GCP) services, gaining hands-on experience in cloud-native application development and deployment.</span>
+                    <span>Architected AI-powered backend services on Google Cloud Platform (GCP) using Cloud Run, Pub/Sub, and Vertex AI, enabling scalable, cloud-native production workflows.</span>
                   </li>
                   <li className="flex gap-2">
                     <ChevronRight className="w-4 h-4 text-blue-400 shrink-0 mt-0.5" />
-                    <span>Exploring LLMs, Retrieval-Augmented Generation (RAG), vector databases, and agent-based workflows through internal projects and technical learning initiatives.</span>
+                    <span>Engineered end-to-end Retrieval-Augmented Generation (RAG) pipelines and agentic AI workflows with LLMs and vector databases, cutting manual process effort by 40%.</span>
                   </li>
                   <li className="flex gap-2">
                     <ChevronRight className="w-4 h-4 text-blue-400 shrink-0 mt-0.5" />
-                    <span>Collaborating with engineers and mentors to understand software development best practices, system design fundamentals, code reviews, and production-scale engineering workflows.</span>
+                    <span>Strengthened system reliability and code quality by driving code reviews and system design discussions, applying Google engineering best practices across test coverage and architecture.</span>
                   </li>
                 </ul>
               </div>
@@ -539,15 +540,15 @@ export default function App() {
                 <ul className="space-y-2.5 text-gray-400 text-sm">
                   <li className="flex gap-2">
                     <ChevronRight className="w-4 h-4 text-purple-400 shrink-0 mt-0.5" />
-                    <span>Designed and developed 20+ REST APIs in .NET Core following Clean Architecture principles, reducing average API response time by 20% and improving overall system scalability.</span>
+                    <span>Engineered 20+ REST APIs in Java, Spring Boot, Node.js, and Express.js using microservices and Clean Architecture, reducing API response time by 20%.</span>
                   </li>
                   <li className="flex gap-2">
                     <ChevronRight className="w-4 h-4 text-purple-400 shrink-0 mt-0.5" />
-                    <span>Built efficient Node.js data services over SQL Server and Google BigQuery, processing and managing 100k+ records with optimized query performance.</span>
+                    <span>Built scalable backend services integrated with SQL Server and Google BigQuery, processing and managing datasets of 100k+ records with high data integrity.</span>
                   </li>
                   <li className="flex gap-2">
                     <ChevronRight className="w-4 h-4 text-purple-400 shrink-0 mt-0.5" />
-                    <span>Deployed and operated cloud services on AWS and GCP; set up CI/CD pipelines using Docker and GitHub Actions, reducing deployment time and improving release reliability.</span>
+                    <span>Containerized and deployed backend applications on GCP with Docker; automated CI/CD pipelines via GitHub Actions, reducing deployment time by 30%.</span>
                   </li>
                 </ul>
               </div>
@@ -580,15 +581,15 @@ export default function App() {
                 <ul className="space-y-2.5 text-gray-400 text-sm">
                   <li className="flex gap-2">
                     <ChevronRight className="w-4 h-4 text-gray-500 shrink-0 mt-0.5" />
-                    <span>Built and optimized REST APIs using Node.js/Express and .NET, applying Clean Architecture and modular design patterns to improve response time by 15–20%.</span>
+                    <span>Built and optimized REST APIs using Java, Spring Boot, Node.js, and Express.js, applying Clean Architecture and modular design patterns.</span>
                   </li>
                   <li className="flex gap-2">
                     <ChevronRight className="w-4 h-4 text-gray-500 shrink-0 mt-0.5" />
-                    <span>Deployed serverless and containerized services on AWS (Lambda, API Gateway, S3, RDS) using Docker, contributing to production-grade scalable infrastructure.</span>
+                    <span>Integrated backend services with SQL Server and Google BigQuery, managing datasets and optimizing query performance.</span>
                   </li>
                   <li className="flex gap-2">
                     <ChevronRight className="w-4 h-4 text-gray-500 shrink-0 mt-0.5" />
-                    <span>Contributed to full-stack development using React (MERN stack), delivering responsive front-end features integrated with backend APIs.</span>
+                    <span>Containerized applications with Docker; assisted in CI/CD pipeline automation via GitHub Actions to streamline release processes.</span>
                   </li>
                 </ul>
               </div>
@@ -606,40 +607,40 @@ export default function App() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {[
               {
-                category: "AI & Generative AI",
+                category: "AI / GenAI",
                 icon: <Sparkles className="w-5 h-5 text-purple-400" />,
                 color: "border-purple-500/20 shadow-purple-500/5 glow-purple",
-                skills: ["LLMs", "Retrieval-Augmented Generation (RAG)", "Agentic AI Workflows", "Vector Databases", "Embeddings", "AI Automation"]
+                skills: ["LLMs", "Retrieval-Augmented Generation (RAG)", "Agentic AI Workflows", "Vector Databases", "Embeddings"]
               },
               {
-                category: "Backend Development",
+                category: "Backend & System Design",
                 icon: <Server className="w-5 h-5 text-blue-400" />,
                 color: "border-blue-500/20 shadow-blue-500/5 glow-blue",
-                skills: [".NET Core", "Node.js", "Express.js", "REST APIs", "Microservices", "Clean Architecture", "Distributed Systems"]
+                skills: ["Java", "Spring Boot", "Spring Data JPA", "REST APIs", "Microservices", "Distributed Systems", "System Design", "Apache Kafka", "Hibernate", "Node.js", "Express.js"]
               },
               {
                 category: "Cloud & DevOps",
                 icon: <Cloud className="w-5 h-5 text-sky-400" />,
                 color: "border-sky-500/20",
-                skills: ["Google Cloud Platform (GCP)", "AWS (Lambda, S3, RDS, API Gateway)", "Docker", "CI/CD Pipelines", "GitHub Actions", "Git"]
+                skills: ["Google Cloud Platform (GCP)", "AWS", "Docker", "Kubernetes (basics)", "CI/CD", "GitHub Actions"]
               },
               {
-                category: "Programming Languages",
+                category: "Languages",
                 icon: <Code className="w-5 h-5 text-amber-400" />,
                 color: "border-amber-500/20",
-                skills: ["C++", "C#", "Python", "JavaScript", "Java", "SQL"]
+                skills: ["Java", "C++", "Python", "JavaScript", "SQL", "C#"]
               },
               {
-                category: "Databases & Warehousing",
+                category: "Databases & Caching",
                 icon: <Database className="w-5 h-5 text-emerald-400" />,
                 color: "border-emerald-500/20",
-                skills: ["MongoDB", "Google BigQuery", "SQL Server", "MySQL"]
+                skills: ["PostgreSQL", "MongoDB", "SQL Server", "Google BigQuery", "Redis"]
               },
               {
-                category: "Frontend Development",
+                category: "Core CS",
                 icon: <Cpu className="w-5 h-5 text-rose-400" />,
                 color: "border-rose-500/20",
-                skills: ["React.js", "Angular", "HTML5", "CSS3 / Tailwind CSS", "JavaScript (ES6+)"]
+                skills: ["Data Structures & Algorithms", "Object-Oriented Design", "Operating Systems", "Computer Networks"]
               }
             ].map((cat, index) => (
               <motion.div
@@ -747,7 +748,7 @@ export default function App() {
               }
             ]
             .filter(project => activeTab === 'all' || project.category === activeTab)
-            .map((project, index) => (
+            .map((project) => (
               <motion.div
                 key={project.id}
                 layout
